@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map, mergeMap } from 'rxjs/operators';
-import { AddressService } from 'src/app/services/address.service';
 import { ProductService } from 'src/app/services/product.service';
 import { Address } from 'src/app/types/address';
 import { Customer } from 'src/app/types/customer';
@@ -10,7 +9,11 @@ import { LineItem } from 'src/app/types/invoice';
 import { Product } from 'src/app/types/product';
 import { Store } from '@ngrx/store';
 import { OpenedCreateInvoicePage } from 'src/app/store/actions';
-import { selectAddress, selectCustomer } from 'src/app/store/selectors';
+import {
+  selectAddress,
+  selectCustomer,
+  selectProducts
+} from 'src/app/store/selectors';
 import { GlobalStore } from 'src/app/store/store';
 
 @Component({
@@ -28,7 +31,6 @@ export class CreateInvoicePageComponent {
   private customerId$: Observable<number>;
 
   constructor(
-    addressService: AddressService,
     productService: ProductService,
     activatedRoute: ActivatedRoute,
     private store: Store<{ globalState: GlobalStore }>
@@ -46,12 +48,10 @@ export class CreateInvoicePageComponent {
     this.address$ = this.store
       .select(selectAddress)
       .pipe(filter((address): address is Address => !!address));
+    this.products$ = this.store
+      .select(selectProducts)
+      .pipe(filter((products): products is Product[] => !!products));
 
-    this.products$ = this.address$.pipe(
-      mergeMap(address =>
-        productService.getProductsAvailableAtAddress(address.id)
-      )
-    );
     this.lineItems$ = this.products$.pipe(
       mergeMap(products => productService.getLineItemsForProducts(products))
     );
