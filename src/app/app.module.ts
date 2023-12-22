@@ -11,6 +11,7 @@ import { SubmitButtonsComponent } from './components/submit-buttons/submit-butto
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './store/reducer';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { reducer } from './store/reducer';
         globalState: reducer
       },
       {}
-    )
+    ),
+    StoreRouterConnectingModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
