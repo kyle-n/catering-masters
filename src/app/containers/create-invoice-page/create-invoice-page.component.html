@@ -6,3 +6,9 @@
 <div id="table-container">
   <app-line-item-table [lineItems]="lineItems$ | async"></app-line-item-table>
 </div>
+<div id="buttons">
+  <button [routerLink]="['/']">Cancel</button>
+  <button [routerLink]="['/customer', (customer$ | async)?.id, 'invoice', 1]">
+    Save
+  </button>
+</div>
