@@ -4,6 +4,7 @@ import { HomeComponent } from './containers/home/home.component';
 import { CreateInvoicePageComponent } from './containers/create-invoice-page/create-invoice-page.component';
 import { EditInvoicePageComponent } from './containers/edit-invoice-page/edit-invoice-page.component';
 import resolveCustomer from './resolvers/customer.resolver';
+import resolveAddress from './resolvers/address.resolver';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -11,7 +12,8 @@ const routes: Routes = [
     path: 'customer/:customerId/invoice/new',
     component: CreateInvoicePageComponent,
     resolve: {
-      customer: resolveCustomer
+      customer: resolveCustomer,
+      address: resolveAddress
     }
   },
   {
