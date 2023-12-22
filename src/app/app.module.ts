@@ -7,16 +7,9 @@ import { HomeComponent } from './containers/home/home.component';
 import { InvoiceComponent } from './containers/invoice/invoice.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    InvoiceComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  declarations: [AppComponent, HomeComponent, InvoiceComponent],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
