@@ -18,7 +18,11 @@ const routes: Routes = [
   },
   {
     path: 'customer/:customerId/invoice/:invoiceId/edit',
-    component: EditInvoicePageComponent
+    component: EditInvoicePageComponent,
+    resolve: {
+      customer: resolveCustomer,
+      address: resolveAddress
+    }
   }
 ];
 
