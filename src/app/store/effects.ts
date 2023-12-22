@@ -8,6 +8,8 @@ import {
   GetCustomer,
   GetCustomerFailure,
   GetCustomerSuccess,
+  GetLineItemsFailure,
+  GetLineItemsOnCreateSuccess,
   GetProductsFailure,
   GetProductsSuccess,
   OpenedCreateInvoicePage
@@ -68,6 +70,18 @@ export class AppEffects {
         this.productService.getProductsAvailableAtAddress(action.address.id).pipe(
           map(products => GetProductsSuccess({ products })),
           catchError(error => of(GetProductsFailure({ error })))
+        )
+      )
+    );
+  });
+
+  getLineItemsForCreatePage = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(GetProductsSuccess),
+      switchMap(action =>
+        this.productService.getLineItemsForProducts(action.products).pipe(
+          map(lineItems => GetLineItemsOnCreateSuccess({ lineItems })),
+          catchError(error => of(GetLineItemsFailure({ error })))
         )
       )
     );

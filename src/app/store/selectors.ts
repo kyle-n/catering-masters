@@ -18,3 +18,8 @@ export const selectProducts = createSelector(
   selectGlobalState,
   state => state.products?.data
 );
+
+export const selectLineItems = createSelector(
+  selectGlobalState,
+  state => state.lineItems?.data
+);

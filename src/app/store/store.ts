@@ -1,6 +1,6 @@
 import { Address } from '../types/address';
 import { Customer } from '../types/customer';
-import { Invoice } from '../types/invoice';
+import { Invoice, LineItem } from '../types/invoice';
 import { Product } from '../types/product';
 
 export type GlobalStore = {
@@ -8,6 +8,7 @@ export type GlobalStore = {
   address?: AsyncEntity<Address>;
   products?: AsyncEntity<Product[]>;
   invoice?: AsyncEntity<Invoice>;
+  lineItems?: AsyncEntity<LineItem[]>;
 }
 
 type AsyncEntity<T> = {
