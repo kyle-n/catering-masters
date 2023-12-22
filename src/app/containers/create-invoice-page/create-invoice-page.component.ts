@@ -7,6 +7,7 @@ import { CustomerService } from 'src/app/services/customer.service';
 import { ProductService } from 'src/app/services/product.service';
 import { Address } from 'src/app/types/address';
 import { Customer } from 'src/app/types/customer';
+import { LineItem } from 'src/app/types/invoice';
 import { Product } from 'src/app/types/product';
 
 @Component({
@@ -19,6 +20,8 @@ export class CreateInvoicePageComponent {
   protected customer$: Observable<Customer>;
   protected address$: Observable<Address>;
   protected products$: Observable<Product[]>;
+
+  protected lineItems: LineItem[] = [];
 
   private customerId$: Observable<number>;
 

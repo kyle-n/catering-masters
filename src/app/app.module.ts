@@ -7,6 +7,7 @@ import { CreateInvoicePageComponent } from './containers/create-invoice-page/cre
 import { ViewInvoicePageComponent } from './containers/view-invoice-page/view-invoice-page.component';
 import { EditInvoicePageComponent } from './containers/edit-invoice-page/edit-invoice-page.component';
 import { HeaderComponent } from './components/header/header.component';
+import { LineItemTableComponent } from './components/line-item-table/line-item-table.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { HeaderComponent } from './components/header/header.component';
     CreateInvoicePageComponent,
     ViewInvoicePageComponent,
     EditInvoicePageComponent,
-    HeaderComponent
+    HeaderComponent,
+    LineItemTableComponent
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
