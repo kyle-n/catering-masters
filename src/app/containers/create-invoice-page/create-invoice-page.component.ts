@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
+import { filter, map, mergeMap } from 'rxjs/operators';
 import { AddressService } from 'src/app/services/address.service';
-import { CustomerService } from 'src/app/services/customer.service';
 import { ProductService } from 'src/app/services/product.service';
 import { Address } from 'src/app/types/address';
 import { Customer } from 'src/app/types/customer';
@@ -11,6 +10,8 @@ import { LineItem } from 'src/app/types/invoice';
 import { Product } from 'src/app/types/product';
 import { Store } from '@ngrx/store';
 import { GetCustomer } from 'src/app/store/actions';
+import { selectCustomer } from 'src/app/store/selectors';
+import { GlobalStore } from 'src/app/store/store';
 
 @Component({
   selector: 'app-create-invoice-page',
@@ -27,11 +28,10 @@ export class CreateInvoicePageComponent {
   private customerId$: Observable<number>;
 
   constructor(
-    customerService: CustomerService,
     addressService: AddressService,
     productService: ProductService,
     activatedRoute: ActivatedRoute,
-    private store: Store
+    private store: Store<{ globalState: GlobalStore }>
   ) {
     this.customerId$ = activatedRoute.params.pipe(
       map(params => Number(params['customerId']))
@@ -40,9 +40,10 @@ export class CreateInvoicePageComponent {
       this.store.dispatch(GetCustomer({ customerId }))
     );
 
-    this.customer$ = this.customerId$.pipe(
-      mergeMap(customerId => customerService.getCustomer(customerId))
-    );
+    this.customer$ = this.store
+      .select(selectCustomer)
+      .pipe(filter((customer): customer is Customer => !!customer));
+
     this.address$ = this.customerId$.pipe(
       mergeMap(customerId => addressService.getAddress(customerId))
     );

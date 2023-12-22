@@ -13,6 +13,7 @@ import { StoreModule } from '@ngrx/store';
 import { reducer } from './store/reducer';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import * as effects from './store/effects';
 
 @NgModule({
@@ -35,6 +36,7 @@ import * as effects from './store/effects';
       },
       {}
     ),
+    StoreDevtoolsModule.instrument(),
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot(effects.AppEffects)
   ],
