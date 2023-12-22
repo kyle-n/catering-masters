@@ -7,7 +7,7 @@ import mockProducts from '../mock-data/products';
   providedIn: 'root'
 })
 export class ProductService {
-  getProducts(): Observable<Product[]> {
+  getProductsAvailableAtAddress(addressId: number): Observable<Product[]> {
     return of(mockProducts);
   }
 }

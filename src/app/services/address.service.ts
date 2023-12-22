@@ -7,7 +7,7 @@ import mockAddress from '../mock-data/address';
   providedIn: 'root'
 })
 export class AddressService {
-  getAddress(): Observable<Address> {
+  getAddress(customerId: number): Observable<Address> {
     return of(mockAddress);
   }
 }
