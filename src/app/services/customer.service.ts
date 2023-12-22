@@ -10,4 +10,8 @@ export class CustomerService {
   getCustomer(id: number): Observable<Customer> {
     return of(mockCustomer);
   }
+
+  getCustomers(): Observable<Customer[]> {
+    return of([mockCustomer]);
+  }
 }

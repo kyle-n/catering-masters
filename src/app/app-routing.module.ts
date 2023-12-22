@@ -1,11 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './containers/home/home.component';
-import { InvoiceComponent } from './containers/invoice/invoice.component';
+import { ViewInvoicePageComponent } from './containers/view-invoice-page/view-invoice-page.component';
+import { CreateInvoicePageComponent } from './containers/create-invoice-page/create-invoice-page.component';
+import { EditInvoicePageComponent } from './containers/edit-invoice-page/edit-invoice-page.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'invoice/:id', component: InvoiceComponent }
+  {
+    path: 'customer/:customerId/invoice/new',
+    component: CreateInvoicePageComponent
+  },
+  {
+    path: 'customer/:customerId/invoice/:invoiceId',
+    component: ViewInvoicePageComponent
+  },
+  {
+    path: 'customer/:customerId/invoice/:invoiceId/edit',
+    component: EditInvoicePageComponent
+  }
 ];
 
 @NgModule({
