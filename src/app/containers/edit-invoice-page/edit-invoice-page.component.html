@@ -1,1 +1,12 @@
-<p>edit-invoice-page works!</p>
+<h1>Edit invoice #{{ invoiceId$ | async }}</h1>
+<app-header
+  [customerName]="(customer$ | async)?.name"
+  [address]="address$ | async"
+></app-header>
+<div id="table-container">
+  <app-line-item-table [lineItems]="lineItems$ | async"></app-line-item-table>
+</div>
+<app-submit-buttons
+  [customerId]="(customer$ | async)?.id"
+  [invoiceId]="invoiceId$ | async"
+></app-submit-buttons>
