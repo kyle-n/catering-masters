@@ -7,3 +7,8 @@ export const selectCustomer = createSelector(
   selectGlobalState,
   state => state.customer?.data
 )
+
+export const selectAddress = createSelector(
+  selectGlobalState,
+  state => state.address?.data
+)

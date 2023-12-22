@@ -9,8 +9,8 @@ import { Customer } from 'src/app/types/customer';
 import { LineItem } from 'src/app/types/invoice';
 import { Product } from 'src/app/types/product';
 import { Store } from '@ngrx/store';
-import { GetCustomer } from 'src/app/store/actions';
-import { selectCustomer } from 'src/app/store/selectors';
+import { OpenedCreateInvoicePage } from 'src/app/store/actions';
+import { selectAddress, selectCustomer } from 'src/app/store/selectors';
 import { GlobalStore } from 'src/app/store/store';
 
 @Component({
@@ -37,16 +37,16 @@ export class CreateInvoicePageComponent {
       map(params => Number(params['customerId']))
     );
     this.customerId$.subscribe(customerId =>
-      this.store.dispatch(GetCustomer({ customerId }))
+      this.store.dispatch(OpenedCreateInvoicePage({ customerId }))
     );
 
     this.customer$ = this.store
       .select(selectCustomer)
       .pipe(filter((customer): customer is Customer => !!customer));
+    this.address$ = this.store
+      .select(selectAddress)
+      .pipe(filter((address): address is Address => !!address));
 
-    this.address$ = this.customerId$.pipe(
-      mergeMap(customerId => addressService.getAddress(customerId))
-    );
     this.products$ = this.address$.pipe(
       mergeMap(address =>
         productService.getProductsAvailableAtAddress(address.id)
