@@ -8,6 +8,7 @@ import { ViewInvoicePageComponent } from './containers/view-invoice-page/view-in
 import { EditInvoicePageComponent } from './containers/edit-invoice-page/edit-invoice-page.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LineItemTableComponent } from './components/line-item-table/line-item-table.component';
+import { SubmitButtonsComponent } from './components/submit-buttons/submit-buttons.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { LineItemTableComponent } from './components/line-item-table/line-item-t
     ViewInvoicePageComponent,
     EditInvoicePageComponent,
     HeaderComponent,
-    LineItemTableComponent
+    LineItemTableComponent,
+    SubmitButtonsComponent
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
