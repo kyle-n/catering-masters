@@ -9,6 +9,8 @@ import { Address } from 'src/app/types/address';
 import { Customer } from 'src/app/types/customer';
 import { LineItem } from 'src/app/types/invoice';
 import { Product } from 'src/app/types/product';
+import { Store } from '@ngrx/store';
+import { GetCustomer } from 'src/app/store/actions';
 
 @Component({
   selector: 'app-create-invoice-page',
@@ -28,10 +30,14 @@ export class CreateInvoicePageComponent {
     customerService: CustomerService,
     addressService: AddressService,
     productService: ProductService,
-    activatedRoute: ActivatedRoute
+    activatedRoute: ActivatedRoute,
+    private store: Store
   ) {
     this.customerId$ = activatedRoute.params.pipe(
       map(params => Number(params['customerId']))
+    );
+    this.customerId$.subscribe(customerId =>
+      this.store.dispatch(GetCustomer({ customerId }))
     );
 
     this.customer$ = this.customerId$.pipe(

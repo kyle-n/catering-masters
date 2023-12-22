@@ -22,3 +22,6 @@ export const GetLineItemsFailure = createAction('[Customer] Get Line Items Failu
 
 export const GetLineItemsOnEdit = createAction('[Customer] Get Line Items On Edit', props<{ invoiceId: number }>());
 export const GetLineItemsOnEditSuccess = createAction('[Customer] Get Line Items On Edit Success', props<{ lineItems: LineItem[] }>());
+
+export const OpenedCreateInvoicePage = createAction('[Customer] Opened Create Invoice Page', props<{ customerId: number }>());
+export const OpenedEditInvoicePage = createAction('[Customer] Opened Edit Invoice Page', props<{ customerId: number, invoiceId: number }>());
