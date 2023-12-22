@@ -10,4 +10,8 @@ export class InvoiceService {
   getInvoice(id: number): Observable<Invoice> {
     return of(mockInvoice);
   }
+
+  getInvoices(): Observable<Invoice[]> {
+    return of([mockInvoice]);
+  }
 }
