@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
+import mockCustomer from '../mock-data/customer';
+import { Observable, of } from 'rxjs';
+import { Customer } from '../types/customer';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
-  constructor() {}
+  getCustomer(id: number): Observable<Customer> {
+    return of(mockCustomer);
+  }
 }
