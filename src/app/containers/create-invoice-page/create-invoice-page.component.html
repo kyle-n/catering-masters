@@ -1,2 +1,5 @@
-<h1>Invoice</h1>
-
+<h1>Create invoice</h1>
+<app-header
+  [customerName]="(customer$ | async)?.name"
+  [address]="address$ | async"
+></app-header>
