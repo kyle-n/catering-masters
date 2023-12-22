@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './containers/home/home.component';
 import { CreateInvoicePageComponent } from './containers/create-invoice-page/create-invoice-page.component';
-import { ViewInvoicePageComponent } from './containers/view-invoice-page/view-invoice-page.component';
 import { EditInvoicePageComponent } from './containers/edit-invoice-page/edit-invoice-page.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LineItemTableComponent } from './components/line-item-table/line-item-table.component';
@@ -15,7 +14,6 @@ import { SubmitButtonsComponent } from './components/submit-buttons/submit-butto
     AppComponent,
     HomeComponent,
     CreateInvoicePageComponent,
-    ViewInvoicePageComponent,
     EditInvoicePageComponent,
     HeaderComponent,
     LineItemTableComponent,
