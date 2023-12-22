@@ -9,6 +9,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { LineItemTableComponent } from './components/line-item-table/line-item-table.component';
 import { SubmitButtonsComponent } from './components/submit-buttons/submit-buttons.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { ProductListComponent } from './components/product-list/product-list.com
     SubmitButtonsComponent,
     ProductListComponent
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, StoreModule.forRoot({}, {})],
   providers: [],
   bootstrap: [AppComponent]
 })
