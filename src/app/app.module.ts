@@ -10,6 +10,7 @@ import { LineItemTableComponent } from './components/line-item-table/line-item-t
 import { SubmitButtonsComponent } from './components/submit-buttons/submit-buttons.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { StoreModule } from '@ngrx/store';
+import { reducer } from './store/reducer';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,16 @@ import { StoreModule } from '@ngrx/store';
     SubmitButtonsComponent,
     ProductListComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, StoreModule.forRoot({}, {})],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    StoreModule.forRoot(
+      {
+        globalState: reducer
+      },
+      {}
+    )
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
