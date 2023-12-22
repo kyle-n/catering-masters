@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { LineItem } from 'src/app/types/invoice';
 
 @Component({
   selector: 'app-line-item-table',
@@ -6,4 +7,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./line-item-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LineItemTableComponent {}
+export class LineItemTableComponent {
+  @Input() lineItems: LineItem[] | null = [];
+}

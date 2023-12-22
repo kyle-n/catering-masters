@@ -20,8 +20,7 @@ export class CreateInvoicePageComponent {
   protected customer$: Observable<Customer>;
   protected address$: Observable<Address>;
   protected products$: Observable<Product[]>;
-
-  protected lineItems: LineItem[] = [];
+  protected lineItems$: Observable<LineItem[]>;
 
   private customerId$: Observable<number>;
 
@@ -42,7 +41,12 @@ export class CreateInvoicePageComponent {
       mergeMap(customerId => addressService.getAddress(customerId))
     );
     this.products$ = this.address$.pipe(
-      mergeMap(address => productService.getProductsAvailableAtAddress(address.id))
+      mergeMap(address =>
+        productService.getProductsAvailableAtAddress(address.id)
+      )
+    );
+    this.lineItems$ = this.products$.pipe(
+      mergeMap(products => productService.getLineItemsForProducts(products))
     );
   }
 }

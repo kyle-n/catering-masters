@@ -3,3 +3,6 @@
   [customerName]="(customer$ | async)?.name"
   [address]="address$ | async"
 ></app-header>
+<div id="table-container">
+  <app-line-item-table [lineItems]="lineItems$ | async"></app-line-item-table>
+</div>
