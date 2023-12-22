@@ -12,6 +12,7 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './store/reducer';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
       },
       {}
     ),
-    StoreRouterConnectingModule.forRoot()
+    StoreRouterConnectingModule.forRoot(),
+    EffectsModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]
