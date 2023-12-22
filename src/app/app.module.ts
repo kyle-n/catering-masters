@@ -8,6 +8,7 @@ import { EditInvoicePageComponent } from './containers/edit-invoice-page/edit-in
 import { HeaderComponent } from './components/header/header.component';
 import { LineItemTableComponent } from './components/line-item-table/line-item-table.component';
 import { SubmitButtonsComponent } from './components/submit-buttons/submit-buttons.component';
+import { ProductListComponent } from './components/product-list/product-list.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { SubmitButtonsComponent } from './components/submit-buttons/submit-butto
     EditInvoicePageComponent,
     HeaderComponent,
     LineItemTableComponent,
-    SubmitButtonsComponent
+    SubmitButtonsComponent,
+    ProductListComponent
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
