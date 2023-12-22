@@ -8,15 +8,21 @@ import {
   GetCustomer,
   GetCustomerFailure,
   GetCustomerSuccess,
+  GetInvoice,
+  GetInvoiceFailure,
+  GetInvoiceSuccess,
   GetLineItemsFailure,
   GetLineItemsOnCreateSuccess,
+  GetLineItemsOnEditSuccess,
   GetProductsFailure,
   GetProductsSuccess,
-  OpenedCreateInvoicePage
+  OpenedCreateInvoicePage,
+  OpenedEditInvoicePage
 } from './actions';
 import { CustomerService } from '../services/customer.service';
 import { AddressService } from '../services/address.service';
 import { ProductService } from '../services/product.service';
+import { InvoiceService } from '../services/invoice.service';
 
 @Injectable()
 export class AppEffects {
@@ -24,7 +30,8 @@ export class AppEffects {
     private readonly actions$: Actions,
     private readonly customerService: CustomerService,
     private readonly addressService: AddressService,
-    private readonly productService: ProductService
+    private readonly productService: ProductService,
+    private readonly invoiceService: InvoiceService
   ) {}
 
   createPageOpened = createEffect(() => {
@@ -34,6 +41,19 @@ export class AppEffects {
         from([
           GetCustomer({ customerId: action.customerId }),
           GetAddress({ customerId: action.customerId })
+        ])
+      )
+    );
+  });
+
+  editPageOpened = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OpenedEditInvoicePage),
+      switchMap(action =>
+        from([
+          GetCustomer({ customerId: action.customerId }),
+          GetAddress({ customerId: action.customerId }),
+          GetInvoice({ invoiceId: action.invoiceId })
         ])
       )
     );
@@ -67,10 +87,12 @@ export class AppEffects {
     return this.actions$.pipe(
       ofType(GetAddressSuccess),
       switchMap(action =>
-        this.productService.getProductsAvailableAtAddress(action.address.id).pipe(
-          map(products => GetProductsSuccess({ products })),
-          catchError(error => of(GetProductsFailure({ error })))
-        )
+        this.productService
+          .getProductsAvailableAtAddress(action.address.id)
+          .pipe(
+            map(products => GetProductsSuccess({ products })),
+            catchError(error => of(GetProductsFailure({ error })))
+          )
       )
     );
   });
@@ -82,6 +104,30 @@ export class AppEffects {
         this.productService.getLineItemsForProducts(action.products).pipe(
           map(lineItems => GetLineItemsOnCreateSuccess({ lineItems })),
           catchError(error => of(GetLineItemsFailure({ error })))
+        )
+      )
+    );
+  });
+
+  getLineItemsForEditPage = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(GetProductsSuccess),
+      switchMap(action =>
+        this.productService.getLineItemsForProducts(action.products).pipe(
+          map(lineItems => GetLineItemsOnEditSuccess({ lineItems })),
+          catchError(error => of(GetLineItemsFailure({ error })))
+        )
+      )
+    );
+  });
+
+  getInvoice = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(GetInvoice),
+      switchMap(action =>
+        this.invoiceService.getInvoice(action.invoiceId).pipe(
+          map(invoice => GetInvoiceSuccess({ invoice })),
+          catchError(error => of(GetInvoiceFailure({ error })))
         )
       )
     );

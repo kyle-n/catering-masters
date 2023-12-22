@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { initialState } from './store';
-import { GetAddress, GetAddressFailure, GetAddressSuccess, GetCustomer, GetCustomerFailure, GetCustomerSuccess, GetLineItemsFailure, GetLineItemsOnCreate, GetLineItemsOnCreateSuccess, GetLineItemsOnEdit, GetLineItemsOnEditSuccess, GetProducts, GetProductsFailure, GetProductsSuccess } from './actions';
+import { GetAddress, GetAddressFailure, GetAddressSuccess, GetCustomer, GetCustomerFailure, GetCustomerSuccess, GetInvoice, GetInvoiceFailure, GetInvoiceSuccess, GetLineItemsFailure, GetLineItemsOnCreate, GetLineItemsOnCreateSuccess, GetLineItemsOnEdit, GetLineItemsOnEditSuccess, GetProducts, GetProductsFailure, GetProductsSuccess } from './actions';
 
 export const reducer = createReducer(
   initialState,
@@ -97,4 +97,24 @@ export const reducer = createReducer(
       data: lineItems
     }
   })),
+  on(GetInvoice, state => ({
+    ...state,
+    invoice: {
+      loading: true
+    }
+  })),
+  on(GetInvoiceSuccess, (state, { invoice }) => ({
+    ...state,
+    invoice: {
+      loading: false,
+      data: invoice
+    }
+  })),
+  on(GetInvoiceFailure, (state, { error }) => ({
+    ...state,
+    invoice: {
+      loading: false,
+      error
+    }
+  }))
 )

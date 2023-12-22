@@ -8,5 +8,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class SubmitButtonsComponent {
   @Input() customerId: number | null | undefined = null;
-  @Input() invoiceId: number | null = null;
+  @Input() invoiceId: number | null | undefined = null;
 }

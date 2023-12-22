@@ -1,14 +1,14 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, map, mergeMap } from 'rxjs';
-import { AddressService } from 'src/app/services/address.service';
-import { CustomerService } from 'src/app/services/customer.service';
-import { InvoiceService } from 'src/app/services/invoice.service';
-import { ProductService } from 'src/app/services/product.service';
+import { Observable, filter, map, mergeMap } from 'rxjs';
+import { GlobalStore } from 'src/app/store/store';
 import { Address } from 'src/app/types/address';
 import { Customer } from 'src/app/types/customer';
 import { Invoice, LineItem } from 'src/app/types/invoice';
 import { Product } from 'src/app/types/product';
+import { Store } from '@ngrx/store';
+import { OpenedEditInvoicePage } from 'src/app/store/actions';
+import { selectCustomer, selectAddress, selectProducts, selectLineItems, selectInvoice } from 'src/app/store/selectors';
 
 @Component({
   selector: 'app-edit-invoice-page',
@@ -21,39 +21,35 @@ export class EditInvoicePageComponent {
   protected address$: Observable<Address>;
   protected products$: Observable<Product[]>;
   protected lineItems$: Observable<LineItem[]>;
-  protected invoiceId$: Observable<number>;
   protected invoice$: Observable<Invoice>;
 
-  private customerId$: Observable<number>;
-
   constructor(
-    customerService: CustomerService,
-    addressService: AddressService,
-    productService: ProductService,
-    invoiceService: InvoiceService,
-    activatedRoute: ActivatedRoute
+    activatedRoute: ActivatedRoute,
+    private store: Store<{ globalState: GlobalStore }>
   ) {
-    this.customerId$ = activatedRoute.params.pipe(
-      map(params => Number(params['customerId']))
-    );
-    this.invoiceId$ = activatedRoute.params.pipe(
-      map(params => Number(params['invoiceId']))
-    );
-
-    this.customer$ = this.customerId$.pipe(
-      mergeMap(customerId => customerService.getCustomer(customerId))
-    );
-    this.address$ = this.customerId$.pipe(
-      mergeMap(customerId => addressService.getAddress(customerId))
-    );
-    this.products$ = this.address$.pipe(
-      mergeMap(address =>
-        productService.getProductsAvailableAtAddress(address.id)
+    activatedRoute.params
+      .pipe(
+        map(params => ({
+          customerId: Number(params['customerId']),
+          invoiceId: Number(params['invoiceId'])
+        }))
       )
-    );
-    this.invoice$ = this.invoiceId$.pipe(
-      mergeMap(invoiceId => invoiceService.getInvoice(invoiceId))
-    );
-    this.lineItems$ = this.invoice$.pipe(map(invoice => invoice.lineItems));
+      .subscribe(ids => this.store.dispatch(OpenedEditInvoicePage(ids)));
+
+    this.customer$ = this.store
+      .select(selectCustomer)
+      .pipe(filter((customer): customer is Customer => !!customer));
+    this.address$ = this.store
+      .select(selectAddress)
+      .pipe(filter((address): address is Address => !!address));
+    this.products$ = this.store
+      .select(selectProducts)
+      .pipe(filter((products): products is Product[] => !!products));
+    this.lineItems$ = this.store
+      .select(selectLineItems)
+      .pipe(filter((lineItems): lineItems is LineItem[] => !!lineItems));
+    this.invoice$ = this.store
+        .select(selectInvoice)
+        .pipe(filter((invoice): invoice is Invoice => !!invoice));
   }
 }

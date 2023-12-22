@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { Customer } from '../types/customer';
 import { Address } from '../types/address';
 import { Product } from '../types/product';
-import { LineItem } from '../types/invoice';
+import { Invoice, LineItem } from '../types/invoice';
 
 export const GetCustomer = createAction('[Customer] Get Customer', props<{ customerId: number }>());
 export const GetCustomerSuccess = createAction('[Customer] Get Customer Success', props<{ customer: Customer }>());
@@ -25,3 +25,7 @@ export const GetLineItemsOnEditSuccess = createAction('[Customer] Get Line Items
 
 export const OpenedCreateInvoicePage = createAction('[Customer] Opened Create Invoice Page', props<{ customerId: number }>());
 export const OpenedEditInvoicePage = createAction('[Customer] Opened Edit Invoice Page', props<{ customerId: number, invoiceId: number }>());
+
+export const GetInvoice = createAction('[Customer] Get Invoice', props<{ invoiceId: number }>());
+export const GetInvoiceSuccess = createAction('[Customer] Get Invoice Success', props<{ invoice: Invoice }>());
+export const GetInvoiceFailure = createAction('[Customer] Get Invoice Failure', props<{ error: string }>());

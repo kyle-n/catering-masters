@@ -1,4 +1,4 @@
-<h1>Edit invoice #{{ invoiceId$ | async }}</h1>
+<h1>Edit invoice #{{ (invoice$ | async)?.id }}</h1>
 <app-header
   [customerName]="(customer$ | async)?.name"
   [address]="address$ | async"
@@ -9,5 +9,5 @@
 </section>
 <app-submit-buttons
   [customerId]="(customer$ | async)?.id"
-  [invoiceId]="invoiceId$ | async"
+  [invoiceId]="(invoice$ | async)?.id"
 ></app-submit-buttons>

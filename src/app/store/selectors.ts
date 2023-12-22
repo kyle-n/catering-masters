@@ -23,3 +23,8 @@ export const selectLineItems = createSelector(
   selectGlobalState,
   state => state.lineItems?.data
 );
+
+export const selectInvoice = createSelector(
+  selectGlobalState,
+  state => state.invoice?.data
+);
