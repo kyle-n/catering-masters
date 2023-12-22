@@ -34,9 +34,10 @@ export class CreateInvoicePageComponent {
       map(params => Number(params['customerId']))
     );
 
-    this.customer$ = this.customerId$.pipe(
-      mergeMap(customerId => customerService.getCustomer(customerId))
+    this.customer$ = activatedRoute.data.pipe(
+      map(data => data['customer'])
     );
+
     this.address$ = this.customerId$.pipe(
       mergeMap(customerId => addressService.getAddress(customerId))
     );
