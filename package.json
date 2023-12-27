@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "start": "concurrently \"npm run build:client:watch\" \"npm run start:dev:server\"",
     "start:client": "ng serve",
     "build:client": "ng build",
+    "build:client:watch": "ng build --watch",
     "watch:client": "ng build --watch --configuration development",
     "test:client": "ng test",
     "format": "prettier --write \"src/**/*.{ts,html}\" \"server/**/*.{ts,html}\"",
