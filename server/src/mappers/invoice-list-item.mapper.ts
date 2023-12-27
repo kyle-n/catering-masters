@@ -3,6 +3,7 @@ import { Invoice } from 'src/types/invoice';
 
 export function mapInvoiceToInvoiceListItem(invoice: Invoice): InvoiceListItem {
   return {
-    id: invoice.id
+    id: invoice.id,
+    customerId: invoice.customerId
   };
 }

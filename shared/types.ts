@@ -5,4 +5,5 @@ export type CustomerListItem = {
 
 export type InvoiceListItem = {
   id: number;
+  customerId: number;
 }
