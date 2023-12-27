@@ -17,8 +17,7 @@ import { ApiService } from '../../services/api.service';
 })
 export class CreateInvoicePageComponent {
   protected headerData$: Observable<InvoiceHeaderCustomerData>;
-
-  private customerId$: Observable<number>;
+  protected customerId$: Observable<number>;
 
   constructor(private apiService: ApiService) {
     this.customerId$ = activatedRoute.params.pipe(

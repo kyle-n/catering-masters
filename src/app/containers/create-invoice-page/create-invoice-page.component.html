@@ -1,8 +1,5 @@
 <h1>Create invoice</h1>
-<app-header
-  [customerName]="(customer$ | async)?.name"
-  [address]="address$ | async"
-></app-header>
+<app-header [customerData]="headerData$ | async"></app-header>
 <section>
   <h3>New Line Items</h3>
   <app-line-item-table [lineItems]="lineItems$ | async"></app-line-item-table>
@@ -12,6 +9,6 @@
   <app-product-list [products]="products$ | async"></app-product-list>
 </section>
 <app-submit-buttons
-  [customerId]="(customer$ | async)?.id"
+  [customerId]="customerId$ | async"
   [invoiceId]="1"
 ></app-submit-buttons>
