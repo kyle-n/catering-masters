@@ -1,5 +1,7 @@
-<h2>{{ customerName }}</h2>
-<div *ngIf="address">
-  {{ address.street }}
-  {{ address.city }}
-</div>
+<ng-container *ngIf="customerData">
+  <h2>{{ customerData.name }}</h2>
+  <div>
+    {{ customerData.street }}
+    {{ customerData.city }}
+  </div>
+</ng-container>

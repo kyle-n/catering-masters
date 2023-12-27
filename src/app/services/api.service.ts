@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CustomerListItem, InvoiceListItem } from 'shared/types';
+import { CustomerListItem, InvoiceListItem, InvoiceHeaderCustomerData } from 'shared/types';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +19,9 @@ export class ApiService {
 
   getInvoiceList(): Observable<InvoiceListItem[]> {
     return this.http.get<InvoiceListItem[]>(`${this.baseUrl}/invoices`);
+  }
+
+  getCustomerHeaderData(customerId: number): Observable<InvoiceHeaderCustomerData> {
+    return this.http.get<InvoiceHeaderCustomerData>(`${this.baseUrl}/customers/${customerId}/header-data`);
   }
 }

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Address } from 'src/app/types/address';
+import { InvoiceHeaderCustomerData } from '@shared/types';
 
 @Component({
   selector: 'app-header',
@@ -8,6 +8,5 @@ import { Address } from 'src/app/types/address';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
-  @Input() address: Address | null | undefined;
-  @Input() customerName: string | null | undefined;
+  @Input() customerData: InvoiceHeaderCustomerData | null | undefined
 }
