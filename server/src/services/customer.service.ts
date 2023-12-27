@@ -1,11 +1,9 @@
-import { Injectable } from '@angular/core';
 import mockCustomer from '../mock-data/customer';
 import { Observable, of } from 'rxjs';
 import { Customer } from '../types/customer';
+import { Injectable } from '@nestjs/common';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CustomerService {
   getCustomer(id: number): Observable<Customer> {
     return of(mockCustomer);
