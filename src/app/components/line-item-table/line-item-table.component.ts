@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { LineItem } from 'src/app/types/invoice';
+import { LineItem } from '@shared/types';
 
 @Component({
   selector: 'app-line-item-table',

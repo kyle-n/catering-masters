@@ -10,7 +10,15 @@ import { ProductService } from './services/product.service';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', '..', 'dist', 'catering-masters'),
+      rootPath: join(
+        __dirname,
+        '..',
+        '..',
+        '..',
+        '..',
+        'dist',
+        'catering-masters'
+      ),
       exclude: ['/api/.*']
     })
   ],

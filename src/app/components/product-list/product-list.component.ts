@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Product } from 'src/app/types/product';
+import { Product } from '@shared/types';
 
 @Component({
   selector: 'app-product-list',

@@ -1,4 +1,4 @@
-import { Invoice } from '../types/invoice';
+import { Invoice } from '@shared/types';
 
 const mockInvoice: Invoice = {
   id: 1,

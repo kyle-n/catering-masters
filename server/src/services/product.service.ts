@@ -1,8 +1,7 @@
 import { Observable, of } from 'rxjs';
-import { Product } from '../types/product';
 import mockProducts from '../mock-data/products';
-import { LineItem } from '../types/invoice';
 import { Injectable } from '@nestjs/common';
+import { Product, LineItem } from '@shared/types';
 
 @Injectable()
 export class ProductService {

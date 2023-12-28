@@ -1,5 +1,4 @@
-import { InvoiceListItem } from '@shared/types';
-import { Invoice } from 'src/types/invoice';
+import { Invoice, InvoiceListItem } from '@shared/types';
 
 export function mapInvoiceToInvoiceListItem(invoice: Invoice): InvoiceListItem {
   return {

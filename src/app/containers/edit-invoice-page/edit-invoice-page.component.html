@@ -1,13 +1,10 @@
 <h1>Edit invoice #{{ invoiceId$ | async }}</h1>
-<app-header
-  [customerName]="(customer$ | async)?.name"
-  [address]="address$ | async"
-></app-header>
+<app-header [customerData]="headerData$ | async"></app-header>
 <section>
   <h3>Invoice Line Items</h3>
   <app-line-item-table [lineItems]="lineItems$ | async"></app-line-item-table>
 </section>
 <app-submit-buttons
-  [customerId]="(customer$ | async)?.id"
+  [customerId]="customerId$ | async"
   [invoiceId]="invoiceId$ | async"
 ></app-submit-buttons>
