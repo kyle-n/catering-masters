@@ -8,7 +8,13 @@ import { Invoice, LineItem } from 'src/app/types/invoice';
 import { Product } from 'src/app/types/product';
 import { Store } from '@ngrx/store';
 import { OpenedEditInvoicePage } from 'src/app/store/actions';
-import { selectCustomer, selectAddress, selectProducts, selectLineItems, selectInvoice } from 'src/app/store/selectors';
+import {
+  selectCustomer,
+  selectAddress,
+  selectProducts,
+  selectLineItems,
+  selectInvoice
+} from 'src/app/store/selectors';
 
 @Component({
   selector: 'app-edit-invoice-page',
@@ -49,7 +55,7 @@ export class EditInvoicePageComponent {
       .select(selectLineItems)
       .pipe(filter((lineItems): lineItems is LineItem[] => !!lineItems));
     this.invoice$ = this.store
-        .select(selectInvoice)
-        .pipe(filter((invoice): invoice is Invoice => !!invoice));
+      .select(selectInvoice)
+      .pipe(filter((invoice): invoice is Invoice => !!invoice));
   }
 }

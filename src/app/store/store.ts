@@ -9,13 +9,13 @@ export type GlobalStore = {
   products?: AsyncEntity<Product[]>;
   invoice?: AsyncEntity<Invoice>;
   lineItems?: AsyncEntity<LineItem[]>;
-}
+};
 
 type AsyncEntity<T> = {
   loading: boolean;
   error?: string;
   data?: T;
-}
+};
 
 export const initialState: GlobalStore = {
   customer: {
