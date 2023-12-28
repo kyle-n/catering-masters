@@ -1,7 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, map, mergeMap } from 'rxjs';
-import { InvoiceHeaderCustomerData, LineItem, Product, Invoice } from '@shared/types';
+import {
+  InvoiceHeaderCustomerData,
+  LineItem,
+  Product,
+  Invoice
+} from '@shared/types';
 import { ApiService } from '../../services/api.service';
 
 @Component({
@@ -18,10 +23,7 @@ export class EditInvoicePageComponent {
   protected headerData$: Observable<InvoiceHeaderCustomerData>;
   protected customerId$: Observable<number>;
 
-  constructor(
-    activatedRoute: ActivatedRoute,
-    apiService: ApiService
-  ) {
+  constructor(activatedRoute: ActivatedRoute, apiService: ApiService) {
     this.customerId$ = activatedRoute.params.pipe(
       map(params => Number(params['customerId']))
     );

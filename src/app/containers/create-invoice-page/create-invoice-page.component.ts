@@ -17,10 +17,7 @@ export class CreateInvoicePageComponent {
   protected lineItems$: Observable<LineItem[]>;
   protected products$: Observable<Product[]>;
 
-  constructor(
-    apiService: ApiService,
-    activatedRoute: ActivatedRoute
-  ) {
+  constructor(apiService: ApiService, activatedRoute: ActivatedRoute) {
     this.customerId$ = activatedRoute.params.pipe(
       map(params => Number(params['customerId']))
     );

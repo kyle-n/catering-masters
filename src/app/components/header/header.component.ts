@@ -8,5 +8,5 @@ import { InvoiceHeaderCustomerData } from '@shared/types';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
-  @Input() customerData: InvoiceHeaderCustomerData | null | undefined
+  @Input() customerData: InvoiceHeaderCustomerData | null | undefined;
 }
