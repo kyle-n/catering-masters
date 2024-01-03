@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Address } from 'src/app/types/address';
 import { Customer } from 'src/app/types/customer';
 import { LineItem } from 'src/app/types/invoice';
@@ -33,7 +34,10 @@ export class CreateInvoicePageComponent {
     private store: Store<{ globalState: GlobalStore }>
   ) {
     activatedRoute.params
-      .pipe(map(params => Number(params['customerId'])))
+      .pipe(
+        map(params => Number(params['customerId'])),
+        takeUntilDestroyed()
+      )
       .subscribe(customerId =>
         this.store.dispatch(OpenedCreateInvoicePage({ customerId }))
       );

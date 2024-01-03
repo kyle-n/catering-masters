@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, filter, map, mergeMap } from 'rxjs';
+import { Observable, filter, map } from 'rxjs';
 import { GlobalStore } from 'src/app/store/store';
 import { Address } from 'src/app/types/address';
 import { Customer } from 'src/app/types/customer';
@@ -15,6 +15,7 @@ import {
   selectLineItems,
   selectInvoice
 } from 'src/app/store/selectors';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-edit-invoice-page',
@@ -38,7 +39,8 @@ export class EditInvoicePageComponent {
         map(params => ({
           customerId: Number(params['customerId']),
           invoiceId: Number(params['invoiceId'])
-        }))
+        })),
+        takeUntilDestroyed()
       )
       .subscribe(ids => this.store.dispatch(OpenedEditInvoicePage(ids)));
 
