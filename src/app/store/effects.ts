@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { catchError, from, map, of, switchMap } from 'rxjs';
+import { catchError, concatMap, map, of, switchMap } from 'rxjs';
 import {
   GetAddress,
   GetAddressFailure,
@@ -37,25 +37,21 @@ export class AppEffects {
   createPageOpened = createEffect(() => {
     return this.actions$.pipe(
       ofType(OpenedCreateInvoicePage),
-      switchMap(action =>
-        from([
-          GetCustomer({ customerId: action.customerId }),
-          GetAddress({ customerId: action.customerId })
-        ])
-      )
+      concatMap(action => [
+        GetCustomer({ customerId: action.customerId }),
+        GetAddress({ customerId: action.customerId })
+      ])
     );
   });
 
   editPageOpened = createEffect(() => {
     return this.actions$.pipe(
       ofType(OpenedEditInvoicePage),
-      switchMap(action =>
-        from([
-          GetCustomer({ customerId: action.customerId }),
-          GetAddress({ customerId: action.customerId }),
-          GetInvoice({ invoiceId: action.invoiceId })
-        ])
-      )
+      concatMap(action => [
+        GetCustomer({ customerId: action.customerId }),
+        GetAddress({ customerId: action.customerId }),
+        GetInvoice({ invoiceId: action.invoiceId })
+      ])
     );
   });
 
