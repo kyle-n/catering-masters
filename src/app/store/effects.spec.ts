@@ -11,9 +11,14 @@ import mockInvoice from '../mock-data/invoice';
 import { TestBed } from '@angular/core/testing';
 import { AppEffects } from './effects';
 import { Actions } from '@ngrx/effects';
-import { GetAddress, GetCustomer, OpenedCreateInvoicePage } from './actions';
+import {
+  GetAddress,
+  GetCustomer,
+  GetCustomerSuccess,
+  OpenedCreateInvoicePage
+} from './actions';
 
-fdescribe('NgRx - Effects', () => {
+describe('NgRx - Effects', () => {
   let service: AppEffects;
   let mockActions$: Subject<Action>;
   let mockCustomerService: jasmine.SpyObj<CustomerService>;
@@ -70,17 +75,33 @@ fdescribe('NgRx - Effects', () => {
     service = TestBed.inject(AppEffects);
   });
 
-  it('should start loading customer and address when create page is opened', () => {
-    service.createPageOpened.pipe(
-      take(2),
-      reduce((acc, action) => [...acc, action], [] as Action[])
-    ).subscribe(actions => {
-      expect(actions).toEqual([
-        GetCustomer({ customerId: mockCustomer.id }),
-        GetAddress({ customerId: mockCustomer.id })
-      ]);
-    });
+  it('should start loading customer and address when create page is opened', done => {
+    service.createPageOpened
+      .pipe(
+        take(2),
+        reduce((acc, action) => [...acc, action], [] as Action[])
+      )
+      .subscribe({
+        next: actions => {
+          expect(actions).toEqual([
+            GetCustomer({ customerId: mockCustomer.id }),
+            GetAddress({ customerId: mockCustomer.id })
+          ]);
+        },
+        complete: done
+      });
 
     mockActions$.next(OpenedCreateInvoicePage({ customerId: mockCustomer.id }));
+  });
+
+  it('should add customer data to the store on success', done => {
+    service.getCustomer.pipe(take(1)).subscribe({
+      next: action => {
+        expect(action).toEqual(GetCustomerSuccess({ customer: mockCustomer }));
+      },
+      complete: done
+    });
+
+    mockActions$.next(GetCustomer({ customerId: mockCustomer.id }));
   });
 });
